@@ -3,11 +3,11 @@ const pokemons_number = 1010
 const loading = document.getElementById('loading')
 
 const fetchPokemons = async () => {
-    showLoading()
+    showElement(loading)
     for (let i = 1;i <= pokemons_number;i++) {
         await getPokemon(i)
     }
-    hideLoading()
+    hideElement(loading)
 }
 
 const getPokemon = async id => {
@@ -40,27 +40,27 @@ const createPokemonCard = (pokemon) => {
     poke_container.appendChild(pokemonEl)
 }
 
-function showLoading() {
-        loading.style.display = 'block'
+function showElement(el) {
+    el.style.display = 'block'
     
 }
-function hideLoading() {
-    loading.style.display = 'none'
+function hideElement(el) {
+    el.style.display = 'none'
 }
 
 document.querySelector('button').addEventListener('click', () => {
-    showLoading()
+    showElement(loading)
     poke_container.innerHTML = ''
     let search = document.querySelector('input').value
     if (search.length !== 0) {
         if (Number.isInteger(Number(search))) {
             search = parseInt(search)
             getPokemon(search)
-            hideLoading()
+            hideElement(loading)
             return
         } else {
             getPokemon(search)
-            hideLoading()
+            hideElement(loading)
             return
         }
     }
