@@ -1,5 +1,5 @@
 const poke_container = document.getElementById('poke_container')
-const pokemons_number = 1110
+const pokemons_number = 1010
 const loading = document.getElementById('loading')
 
 const fetchPokemons = async () => {
@@ -54,13 +54,17 @@ document.querySelector('button').addEventListener('click', () => {
     let search = document.querySelector('input').value
     if (search.length !== 0) {
         if (Number.isInteger(Number(search))) {
-            search = search * 1
+            search = parseInt(search)
+            getPokemon(search)
+            hideLoading()
+            return
+        } else {
             getPokemon(search)
             hideLoading()
             return
         }
     }
     fetchPokemons()
-    
 })
+
 fetchPokemons()
