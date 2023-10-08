@@ -1,13 +1,19 @@
 const poke_container = document.getElementById('poke_container')
-const pokemons_number = 1010
 const loading = document.getElementById('loading')
+const pokemons_number = 1010
+let pokemonsLoaded = 0
+let pokemonsToLoad = 24
+let lastYLoad = 0
+let inload = false
 
 const fetchPokemons = async () => {
+    inload = true
     showElement(loading)
-    for (let i = 1;i <= pokemons_number;i++) {
+    for (let i = pokemonsLoaded + 1;i <= pokemonsToLoad;i++) {
         await getPokemon(i)
     }
     hideElement(loading)
+    inload = false
 }
 
 const getPokemon = async id => {
@@ -38,12 +44,13 @@ const createPokemonCard = (pokemon) => {
     `
     pokemonEl.innerHTML = pokeInnerHTML
     poke_container.appendChild(pokemonEl)
+    pokemonsLoaded++
 }
 
 function showElement(el) {
     el.style.display = 'block'
-    
 }
+
 function hideElement(el) {
     el.style.display = 'none'
 }
@@ -65,6 +72,25 @@ document.querySelector('button').addEventListener('click', () => {
         }
     }
     fetchPokemons()
+})
+
+const scrollListner = window.addEventListener('scroll', () => {
+    if(window.scrollY - lastYLoad >= 180 && pokemonsLoaded <= pokemons_number && !inload) {
+        lastYLoad = window.scrollY
+        if(pokemonsToLoad + 6 >= pokemons_number) {
+            for(let f = 0;f <= 6;f++) {
+                if(pokemonsToLoad + 1 <= pokemons_number) {
+                    pokemonsToLoad++
+                }
+            }
+        } else {
+            pokemonsToLoad += 6
+        }
+        fetchPokemons()
+    }
+    if(pokemonsLoaded == pokemons_number) {
+        window.removeEventListener('scroll', scrollListner)
+    }
 })
 
 fetchPokemons()
