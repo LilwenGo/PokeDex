@@ -78,4 +78,29 @@ h1 {
     right: 0;
     bottom: 0;
     display: none;
+    z-index: 1;
+}
+
+#poke_info {
+    position: absolute;
+    width: 80%;
+    min-height: 500px;
+    background-color: #eee;
+    border-radius: 7%;
+    box-shadow: 0 3px 15px rgba(100,100,100,0.5);
+    top: 150px;
+    z-index: 2;
+    display: none;
+}
+
+#croix {
+    position: absolute;
+    top: 120px;
+    right: 10%;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    z-index: 2;
+    display: none;
 }

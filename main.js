@@ -1,4 +1,6 @@
 const poke_container = document.getElementById('poke_container')
+const poke_info = document.getElementById('poke_info')
+const croix = document.getElementById('croix')
 const loading = document.getElementById('loading')
 const pokemons_number = 1010
 let pokemonsLoaded = 0
@@ -50,9 +52,10 @@ const createPokemonCard = (pokemon) => {
 }
 
 function showPokemonInfo() {
-    hideElement(poke_container, "flex")
+    showElement(poke_info, "block")
+    showElement(loading, "block")
+    showElement(croix, "block")
     const id = this.getAttribute('id')
-    showElement(poke_container, "flex")
 }
 
 function showElement(el, dspl) {
@@ -63,7 +66,7 @@ function hideElement(el) {
     el.style.display = "none"
 }
 
-document.querySelector('button').addEventListener('click', () => {
+document.querySelector('#rechercher').addEventListener('click', () => {
     showElement(loading, "block")
     poke_container.innerHTML = ''
     let search = document.querySelector('input').value
@@ -99,6 +102,13 @@ const scrollListner = window.addEventListener('scroll', () => {
         }
         fetchPokemons()
     }
+})
+
+const croixclick = croix.addEventListener('click', () => {
+    hideElement(poke_info)
+    hideElement(loading)
+    hideElement(croix)
+    poke_info.innerHTML = ''
 })
 
 fetchPokemons()
