@@ -8,7 +8,7 @@ let inload = false
 
 const fetchPokemons = async () => {
     inload = true
-    showElement(loading)
+    showElement(loading, "block")
     for (let i = pokemonsLoaded + 1;i <= pokemonsToLoad;i++) {
         await getPokemon(i)
     }
@@ -22,7 +22,7 @@ const getPokemon = async id => {
     const pokemon = await res.json()
     const search = document.querySelector('input').value
     if (Number.isInteger(Number(search)) || pokemon.name.toLowerCase().includes(search)) {
-        createPokemonCard(pokemon)
+        createPokemonCard(pokemon, id)
     }
 }
 
@@ -43,20 +43,28 @@ const createPokemonCard = (pokemon) => {
         </div>
     `
     pokemonEl.innerHTML = pokeInnerHTML
+    pokemonEl.setAttribute('id', id)
     poke_container.appendChild(pokemonEl)
+    pokemonEl.addEventListener("click", showPokemonInfo)
     pokemonsLoaded++
 }
 
-function showElement(el) {
-    el.style.display = 'block'
+function showPokemonInfo() {
+    hideElement(poke_container, "flex")
+    const id = this.getAttribute('id')
+    showElement(poke_container, "flex")
+}
+
+function showElement(el, dspl) {
+    el.style.display = dspl
 }
 
 function hideElement(el) {
-    el.style.display = 'none'
+    el.style.display = "none"
 }
 
 document.querySelector('button').addEventListener('click', () => {
-    showElement(loading)
+    showElement(loading, "block")
     poke_container.innerHTML = ''
     let search = document.querySelector('input').value
     if (search.length !== 0) {
