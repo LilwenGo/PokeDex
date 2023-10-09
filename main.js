@@ -51,11 +51,40 @@ const createPokemonCard = (pokemon) => {
     pokemonsLoaded++
 }
 
-function showPokemonInfo() {
-    showElement(poke_info, "block")
+async function showPokemonInfo() {
+    inload = true
+    showElement(poke_info, "flex")
     showElement(loading, "block")
     showElement(croix, "block")
     const id = this.getAttribute('id')
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}`
+    const res = await fetch(url)
+    const pokemon = await res.json()
+    const {name, sprites, types} = pokemon
+    const upName = name.toUpperCase()
+    const type1 = types[0].type.name
+    let type2 = ""
+    if(types[1]) {
+        type2 = types[1].type.name
+    } else {
+        type2 = "none"
+    }
+    poke_info.innerHTML = `
+    <div class="poke_imgs">
+        <div class="img-container">
+            <img src="${sprites.front_default}" alt="${upName}">
+        </div>
+        <div class="img-container">
+            <img src="${sprites.front_shiny}" alt="${upName} Shiny">
+        </div>
+    </div>
+    <div class="info">
+        <h2 class="name">${upName}</h2>
+        <span class="number">${id}</span>
+        <small class="type">Type 1: <span>${type1}</span></small>
+        <small class="type">Type 2: <span>${type2}</span></small>
+    </div>
+`
 }
 
 function showElement(el, dspl) {
@@ -108,6 +137,7 @@ const croixclick = croix.addEventListener('click', () => {
     hideElement(poke_info)
     hideElement(loading)
     hideElement(croix)
+    inload = false
     poke_info.innerHTML = ''
 })
 
