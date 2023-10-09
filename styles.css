@@ -83,20 +83,23 @@ h1 {
 
 #poke_info {
     position: absolute;
-    width: 80%;
-    min-height: 500px;
+    width: 80vw;
+    height: 80vh;
     background-color: #eee;
     border-radius: 7%;
     box-shadow: 0 3px 15px rgba(100,100,100,0.5);
-    top: 150px;
+    top: 10vh;
+    bottom: 10vh;
+    left: 10vw;
+    right: 10vw;
     z-index: 2;
     display: none;
 }
 
 #croix {
     position: absolute;
-    top: 120px;
-    right: 10%;
+    top: 7vh;
+    right: 10vw;
     border: none;
     border-radius: 50%;
     width: 25px;
