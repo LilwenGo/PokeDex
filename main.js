@@ -65,12 +65,15 @@ document.querySelector('button').addEventListener('click', () => {
             getPokemon(search)
             hideElement(loading)
             return
-        } else {
+        } else if (search.length > 2){
             getPokemon(search)
             hideElement(loading)
             return
         }
     }
+    pokemonsLoaded = 0
+    pokemonsToLoad = 24
+    lastYLoad = 0
     fetchPokemons()
 })
 
@@ -87,9 +90,6 @@ const scrollListner = window.addEventListener('scroll', () => {
             pokemonsToLoad += 6
         }
         fetchPokemons()
-    }
-    if(pokemonsLoaded == pokemons_number) {
-        window.removeEventListener('scroll', scrollListner)
     }
 })
 
