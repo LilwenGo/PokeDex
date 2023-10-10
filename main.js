@@ -60,7 +60,7 @@ async function showPokemonInfo() {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`
     const res = await fetch(url)
     const pokemon = await res.json()
-    const {name, sprites, types} = pokemon
+    const {name, sprites, types, stats} = pokemon
     const upName = name.toUpperCase()
     const type1 = types[0].type.name
     let type2 = ""
@@ -72,17 +72,20 @@ async function showPokemonInfo() {
     poke_info.innerHTML = `
     <div class="poke_imgs">
         <div class="img-container">
-            <img src="${sprites.front_default}" alt="${upName}">
+            <img src="${sprites.front_default}" alt="${upName}" title="Image pokemon">
         </div>
         <div class="img-container">
-            <img src="${sprites.front_shiny}" alt="${upName} Shiny">
+            <img src="${sprites.front_shiny}" alt="${upName} Shiny" title="Image pokemon Shiny">
         </div>
     </div>
     <div class="info">
         <h2 class="name">${upName}</h2>
-        <span class="number">${id}</span>
-        <small class="type">Type 1: <span>${type1}</span></small>
-        <small class="type">Type 2: <span>${type2}</span></small>
+        <span class="number">${id}</span><br>
+        <h4 class="type">Type 1: <span>${type1}</span></h4>
+        <h4 class="type">Type 2: <span>${type2}</span></h4>
+    </div>
+    <div class="stats_container">
+
     </div>
 `
 }
@@ -106,7 +109,7 @@ document.querySelector('#rechercher').addEventListener('click', () => {
             hideElement(loading)
             return
         } else if (search.length > 2){
-            getPokemon(search)
+            getPokemon(search.toLowerCase())
             hideElement(loading)
             return
         }

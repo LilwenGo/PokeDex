@@ -55,11 +55,12 @@ h1 {
 
 #poke_info .img-container {
     background-color: rgba(255,255,255,0.6);
-    border-radius: 50%;
+    border-radius: 20%;
     margin: 5%;
     width: 40%;
-    height: 80%;
+    height: max-content;
     text-align: center;
+    box-shadow: 0 3px 15px rgba(100,100,100,0.5);
 }
 
 #poke_info .img-container img {
@@ -69,8 +70,20 @@ h1 {
 
 #poke_info .info {
     text-align: center;
-    margin: 20px;
-    width: max-content;
+    margin: 2.5%;
+    width: 45%;
+    background-color: rgba(150,255,255,0.6);
+    border-radius: 20%;
+    box-shadow: 0 3px 15px rgba(100,100,100,0.5);
+}
+
+#poke_info .stats_container {
+    width: 90%;
+    height: 45%;
+    margin: 5%;
+    background-color: rgba(255,255,150,0.6);
+    box-shadow: 0 3px 15px rgba(100,100,100,0.5);
+    border-radius: 20%;
 }
 
 .pokemon .img-container img {
@@ -82,7 +95,7 @@ h1 {
     margin-top: 20px;
 }
 
-.pokemon .number {
+.pokemon .number, #poke_info .number {
     background-color: rgba(0,0,0,0.1);
     border-radius: 10px;
     font-size: 0.8em;
@@ -119,9 +132,11 @@ h1 {
     right: 10vw;
     z-index: 2;
     display: none;
+    flex-wrap: wrap;
 }
 
 #croix {
+    background-color: #eee;
     position: fixed;
     top: 7vh;
     right: 10vw;
@@ -131,4 +146,8 @@ h1 {
     height: 25px;
     z-index: 2;
     display: none;
+}
+
+#croix:hover {
+    background-color: #bbb;
 }
