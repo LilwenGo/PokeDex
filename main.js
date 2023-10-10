@@ -36,7 +36,7 @@ const createPokemonCard = (pokemon) => {
     const type = types[0].type.name
     const pokeInnerHTML = `
         <div class="img-container">
-            <img src="${sprites.front_default}" alt="${upName}">
+            <img src="${sprites.front_default}" alt="Image ${upName}">
         </div>
         <div class="info">
             <span class="number">${id}</span>
@@ -72,10 +72,10 @@ async function showPokemonInfo() {
     poke_info.innerHTML = `
     <div class="poke_imgs">
         <div class="img-container">
-            <img src="${sprites.front_default}" alt="${upName}" title="Image pokemon">
+            <img src="${sprites.front_default}" alt="Image ${upName}" title="Image pokemon">
         </div>
         <div class="img-container">
-            <img src="${sprites.front_shiny}" alt="${upName} Shiny" title="Image pokemon Shiny">
+            <img src="${sprites.front_shiny}" alt="Image ${upName} shiny" title="Image pokemon Shiny">
         </div>
     </div>
     <div class="info">
