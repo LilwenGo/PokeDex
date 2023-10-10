@@ -83,6 +83,22 @@ h1 {
     background-color: rgba(255,255,150,0.6);
     box-shadow: 0 3px 15px rgba(100,100,100,0.5);
     border-radius: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: larger;
+}
+
+#poke_info .stats_container .stat {
+    width: 40%;
+    margin: 5px 5%;
+    height: min-content;
+    display: flex;
+}
+
+#poke_info .stats_container .stat .stat_graph{
+    margin: 5px 5%;
+    /* background-color: greenyellow; */
+    height: min-content;
 }
 
 .pokemon .img-container img {

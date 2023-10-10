@@ -85,9 +85,25 @@ async function showPokemonInfo() {
         <h4 class="type">Type 2: <span>${type2}</span></h4>
     </div>
     <div class="stats_container">
-
     </div>
 `
+    for(let i = 0;i < stats.length;i++) {
+        let stat = document.createElement("div")
+        stat.classList.add("stat")
+        stat.innerHTML = `
+        <p>${stats[i].stat.name.toUpperCase()}: ${stats[i].base_stat}</p>
+        <div class="stat_graph" style="width:${stats[i].base_stat * 2}px;"><p style="visibility:hidden; margin:0;">P</p></div>`
+        document.querySelector(".stats_container").appendChild(stat)
+        if(stats[i].base_stat >= 100) {
+            document.querySelectorAll(".stat_graph")[i].style.backgroundColor = "greenyellow"
+        } else if(stats[i].base_stat >= 80) {
+            document.querySelectorAll(".stat_graph")[i].style.backgroundColor = "yellow"
+        } else if(stats[i].base_stat >= 60) {
+            document.querySelectorAll(".stat_graph")[i].style.backgroundColor = "orange"
+        } else if(stats[i].base_stat < 60) {
+            document.querySelectorAll(".stat_graph")[i].style.backgroundColor = "red"
+        }
+    }
 }
 
 function showElement(el, dspl) {
