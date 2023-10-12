@@ -91,8 +91,8 @@ async function showPokemonInfo() {
         let stat = document.createElement("div")
         stat.classList.add("stat")
         stat.innerHTML = `
-        <p>${stats[i].stat.name.toUpperCase()}: ${stats[i].base_stat}</p>
-        <div class="stat_graph" style="width:${stats[i].base_stat * 2}px;"><p style="visibility:hidden; margin:0;">P</p></div>`
+        <p>${stats[i].stat.name.toUpperCase()}:</p>
+        <div class="stat_graph" style="width:${stats[i].base_stat * 2}px;"><p style="margin:0; font-size: large;">${stats[i].base_stat}</p></div>`
         document.querySelector(".stats_container").appendChild(stat)
         if(stats[i].base_stat >= 100) {
             document.querySelectorAll(".stat_graph")[i].style.backgroundColor = "greenyellow"
