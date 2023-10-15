@@ -18,11 +18,12 @@ const fetchPokemons = async () => {
     inload = false
 }
 
-const getPokemon = async id => {
+const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`
     const res = await fetch(url)
     const pokemon = await res.json()
-    const search = document.querySelector('input').value
+    let search = document.querySelector('input').value
+    search = search.toLowerCase()
     if (Number.isInteger(Number(search)) || pokemon.name.toLowerCase().includes(search)) {
         createPokemonCard(pokemon, id)
     }
@@ -125,7 +126,8 @@ document.querySelector('#rechercher').addEventListener('click', () => {
             hideElement(loading)
             return
         } else if (search.length > 2){
-            getPokemon(search.toLowerCase())
+            search = search.toLowerCase()
+            getPokemon(search)
             hideElement(loading)
             return
         }
