@@ -80,7 +80,7 @@ h1 {
     width: 90%;
     height: 45%;
     margin: 5%;
-    padding: 5% 0;
+    padding: 4vh 0;
     background-color: rgba(255,255,150,0.6);
     box-shadow: 0 3px 15px rgba(100,100,100,0.5);
     border-radius: 10vh;
@@ -91,7 +91,7 @@ h1 {
 
 #poke_info .stats_container .stat {
     width: 40%;
-    margin: 5px 5%;
+    margin: 1vh 5%;
     height: min-content;
     display: flex;
 }
@@ -142,18 +142,16 @@ h1 {
 #poke_info {
     position: fixed;
     width: 80vw;
-    min-height: 80vh;
+    min-height: max-content;
     background-color: #eee;
     border-radius: 10vh;
     box-shadow: 0 3px 15px rgba(100,100,100,0.5);
     top: 10vh;
-    bottom: 10vh;
     left: 10vw;
     right: 10vw;
     z-index: 2;
     display: none;
     flex-wrap: wrap;
-    padding-bottom: 10vh;
 }
 
 #croix {
