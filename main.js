@@ -7,6 +7,17 @@ let pokemonsLoaded = 0
 let pokemonsToLoad = 24
 let lastYLoad = 0
 let inload = false
+let names = []
+loadNames()
+
+async function loadNames () {
+    for(let i = 1;i < 1011;i++) {
+        const url = `Names.json`
+        const res = await fetch(url)
+        const pokemon = await res.json()
+        names = pokemon
+    }
+}
 
 const fetchPokemons = async () => {
     inload = true
@@ -163,12 +174,24 @@ const croixclick = croix.addEventListener('click', () => {
 })
 
 const autocomplete = document.querySelector("#recherche").addEventListener('keyup', (e) => {
-    console.log("...")
     let rechercher = document.querySelector("#recherche")
     let autoselect = document.querySelector("#autocomplete")
-    if(rechercher.value.match(/^([a-z0-9]+)$/)) {
+    let options = []
+    if(rechercher.value.match(/^([a-z\\-]+)$/) && !parseInt(rechercher.value)) {
+        autoselect.innerHTML = ""
         showElement(autoselect, "block")
+        for(let i = 0;i < names.length;i++) {
+            if(names[i].includes(rechercher.value)) {
+                let option = document.createElement("option")
+                option.innerHTML = names[i]
+                options.push(option)
+                option.setAttribute("value", names[i])
+                option.setAttribute("size", options.length)
+                autoselect.appendChild(option)
+            }
+        }
     } else {
+        autoselect.innerHTML = ""
         hideElement(autoselect)
     }
 })
