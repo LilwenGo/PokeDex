@@ -170,3 +170,11 @@ h1 {
 #croix:hover {
     background-color: #bbb;
 }
+
+#autocomplete {
+    display: none;
+}
+
+option:hover {
+    background-color: rgba(0, 80, 255, 0.7);
+}

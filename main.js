@@ -25,7 +25,7 @@ const getPokemon = async (id) => {
     let search = document.querySelector('input').value
     search = search.toLowerCase()
     if (Number.isInteger(Number(search)) || pokemon.name.toLowerCase().includes(search)) {
-        createPokemonCard(pokemon, id)
+        createPokemonCard(pokemon)
     }
 }
 
@@ -115,7 +115,7 @@ function hideElement(el) {
     el.style.display = "none"
 }
 
-document.querySelector('#rechercher').addEventListener('click', () => {
+const recherche = document.querySelector('#rechercher').addEventListener('click', () => {
     showElement(loading, "block")
     poke_container.innerHTML = ''
     let search = document.querySelector('input').value
@@ -160,6 +160,17 @@ const croixclick = croix.addEventListener('click', () => {
     hideElement(croix)
     inload = false
     poke_info.innerHTML = ''
+})
+
+const autocomplete = document.querySelector("#recherche").addEventListener('keyup', (e) => {
+    console.log("...")
+    let rechercher = document.querySelector("#recherche")
+    let autoselect = document.querySelector("#autocomplete")
+    if(rechercher.value.match(/^([a-z0-9]+)$/)) {
+        showElement(autoselect, "block")
+    } else {
+        hideElement(autoselect)
+    }
 })
 
 fetchPokemons()
