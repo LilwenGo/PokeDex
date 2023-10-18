@@ -195,7 +195,10 @@ const autocomplete = document.querySelector("#recherche").addEventListener('keyu
     let rechercher = document.querySelector("#recherche")
     let autoselect = document.querySelector("#autocomplete")
     let options = []
-    autoselect.addEventListener('click', () => {
+    if(clickselect) {
+        autoselect.removeEventListener(clickselect)
+    }
+    const clickselect = autoselect.addEventListener('click', () => {
         rechercher.value = autoselect.value
         autoselect.innerHTML = ""
         hideElement(autoselect)
