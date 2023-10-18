@@ -177,7 +177,7 @@ const autocomplete = document.querySelector("#recherche").addEventListener('keyu
     let rechercher = document.querySelector("#recherche")
     let autoselect = document.querySelector("#autocomplete")
     let options = []
-    if(rechercher.value.match(/^([a-z\\-]+)$/) && !parseInt(rechercher.value)) {
+    if(rechercher.value.match(/^([A-Za-z\\-]+)$/) && !parseInt(rechercher.value)) {
         autoselect.innerHTML = ""
         showElement(autoselect, "block")
         for(let i = 0;i < names.length;i++) {
@@ -186,9 +186,9 @@ const autocomplete = document.querySelector("#recherche").addEventListener('keyu
                 option.innerHTML = names[i]
                 options.push(option)
                 option.setAttribute("value", names[i])
-                option.setAttribute("size", options.length)
                 autoselect.appendChild(option)
             }
+            autoselect.setAttribute("size", options.length)
         }
     } else {
         autoselect.innerHTML = ""
