@@ -173,6 +173,7 @@ h1 {
 
 #autocomplete {
     display: none;
+    width: 177px;
 }
 
 option:hover {

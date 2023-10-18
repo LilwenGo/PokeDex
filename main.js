@@ -2,6 +2,7 @@ const poke_container = document.getElementById('poke_container')
 const poke_info = document.getElementById('poke_info')
 const croix = document.getElementById('croix')
 const loading = document.getElementById('loading')
+const searchinput = document.getElementById('recherche')
 const pokemons_number = 1010
 let pokemonsLoaded = 0
 let pokemonsToLoad = 24
@@ -22,10 +23,12 @@ async function loadNames () {
 const fetchPokemons = async () => {
     inload = true
     showElement(loading, "block")
+    toggleReadOnly()
     for (let i = pokemonsLoaded + 1;i <= pokemonsToLoad;i++) {
         await getPokemon(i)
     }
     hideElement(loading)
+    toggleReadOnly()
     inload = false
 }
 
@@ -67,6 +70,7 @@ async function showPokemonInfo() {
     inload = true
     showElement(poke_info, "flex")
     showElement(loading, "block")
+    toggleReadOnly()
     showElement(croix, "block")
     const id = this.getAttribute('id')
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`
@@ -126,8 +130,17 @@ function hideElement(el) {
     el.style.display = "none"
 }
 
+function toggleReadOnly() {
+    if(searchinput.getAttribute("readonly")) {
+        searchinput.removeAttribute("readonly")
+    } else {
+        searchinput.setAttribute("readonly", "readonly")
+    }
+}
+
 const recherche = document.querySelector('#rechercher').addEventListener('click', () => {
     showElement(loading, "block")
+    toggleReadOnly()
     poke_container.innerHTML = ''
     let search = document.querySelector('input').value
     if (search.length !== 0) {
@@ -135,13 +148,17 @@ const recherche = document.querySelector('#rechercher').addEventListener('click'
             search = parseInt(search)
             getPokemon(search)
             hideElement(loading)
+            toggleReadOnly()
             return
         } else if (search.length > 2){
             search = search.toLowerCase()
             getPokemon(search)
             hideElement(loading)
+            toggleReadOnly()
             return
         }
+    } else {
+        toggleReadOnly()
     }
     pokemonsLoaded = 0
     pokemonsToLoad = 24
@@ -168,6 +185,7 @@ const scrollListner = window.addEventListener('scroll', () => {
 const croixclick = croix.addEventListener('click', () => {
     hideElement(poke_info)
     hideElement(loading)
+    toggleReadOnly()
     hideElement(croix)
     inload = false
     poke_info.innerHTML = ''
@@ -177,23 +195,38 @@ const autocomplete = document.querySelector("#recherche").addEventListener('keyu
     let rechercher = document.querySelector("#recherche")
     let autoselect = document.querySelector("#autocomplete")
     let options = []
+    autoselect.addEventListener('click', () => {
+        rechercher.value = autoselect.value
+        autoselect.innerHTML = ""
+        hideElement(autoselect)
+    })
     if(rechercher.value.match(/^([A-Za-z\\-]+)$/) && !parseInt(rechercher.value)) {
         autoselect.innerHTML = ""
-        showElement(autoselect, "block")
+        showElement(autoselect, "inline-block")
         for(let i = 0;i < names.length;i++) {
-            if(names[i].includes(rechercher.value)) {
+            if(names[i].toLowerCase().includes(rechercher.value.toLowerCase())) {
                 let option = document.createElement("option")
                 option.innerHTML = names[i]
                 options.push(option)
                 option.setAttribute("value", names[i])
                 autoselect.appendChild(option)
             }
-            autoselect.setAttribute("size", options.length)
+            if(options.length > 10) {
+                autoselect.setAttribute("size", 10)
+            } else {
+                autoselect.setAttribute("size", options.length)
+            }
         }
     } else {
         autoselect.innerHTML = ""
         hideElement(autoselect)
     }
+    if(options.length > 10) {
+        autoselect.setAttribute("size", 10)
+    } else {
+        autoselect.setAttribute("size", options.length)
+    }
+
 })
 
 fetchPokemons()
