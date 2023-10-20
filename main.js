@@ -195,14 +195,6 @@ const autocomplete = document.querySelector("#recherche").addEventListener('keyu
     let rechercher = document.querySelector("#recherche")
     let autoselect = document.querySelector("#autocomplete")
     let options = []
-    if(clickselect) {
-        autoselect.removeEventListener(clickselect)
-    }
-    const clickselect = autoselect.addEventListener('click', () => {
-        rechercher.value = autoselect.value
-        autoselect.innerHTML = ""
-        hideElement(autoselect)
-    })
     if(rechercher.value.match(/^([A-Za-z\\-]+)$/) && !parseInt(rechercher.value)) {
         autoselect.innerHTML = ""
         showElement(autoselect, "inline-block")
@@ -230,6 +222,13 @@ const autocomplete = document.querySelector("#recherche").addEventListener('keyu
         autoselect.setAttribute("size", options.length)
     }
 
+})
+
+const clickselect = document.querySelector("#autocomplete").addEventListener('click', () => {
+    let autoselect = document.querySelector("#autocomplete")
+    document.querySelector("#recherche").value = autoselect.value
+    autoselect.innerHTML = ""
+    hideElement(autoselect)
 })
 
 fetchPokemons()
