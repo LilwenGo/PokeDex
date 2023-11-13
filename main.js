@@ -142,6 +142,7 @@ function toggleReadOnly() {
 }
 
 const recherche = document.querySelector('#rechercher').addEventListener('click', () => {
+    hideElement(document.querySelector("#autocomplete"))
     showElement(loading, "block")
     toggleReadOnly()
     poke_container.innerHTML = ''
