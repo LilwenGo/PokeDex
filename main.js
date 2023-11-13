@@ -48,10 +48,11 @@ const createPokemonCard = (pokemon) => {
     pokemonEl.classList.add('pokemon')
     const {id, name, sprites, types} = pokemon
     const upName = name.toUpperCase()
-    const type = types[0].type.name
+    const type = types[0].type.name;
+    let frontimg = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
     const pokeInnerHTML = `
         <div class="img-container">
-            <img src="${sprites.front_default}" alt="Image ${upName}">
+            <img src="${frontimg}" alt="Image ${upName}">
         </div>
         <div class="info">
             <span class="number">${id}</span>
@@ -85,13 +86,15 @@ async function showPokemonInfo() {
     } else {
         type2 = "none"
     }
+    let frontimg = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+    let shinyimg = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`
     poke_info.innerHTML = `
     <div class="poke_imgs">
         <div class="img-container">
-            <img src="${sprites.front_default}" alt="Image ${upName}" title="Image pokemon">
+            <img src="${frontimg}" alt="Image ${upName}" title="Image pokemon">
         </div>
         <div class="img-container">
-            <img src="${sprites.front_shiny}" alt="Image ${upName} shiny" title="Image pokemon Shiny">
+            <img src="${shinyimg}" alt="Image ${upName} shiny" title="Image pokemon Shiny">
         </div>
     </div>
     <div class="info">
