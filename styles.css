@@ -6,11 +6,11 @@
 
 body {
     margin: 0;
+    background: linear-gradient(to right, #d4d3dd, #ffc600);
 }
 
 #body {
     position: relative;
-    background: linear-gradient(to right, #d4d3dd, #ffc600);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -171,6 +171,20 @@ button#rechercher {
     z-index: 2;
     display: none;
     flex-wrap: wrap;
+}
+
+@media screen and (max-width: 500px) {
+    #poke_info {
+        flex-direction: column;
+    }
+
+    #poke_info .poke_imgs {
+        width: 100%;
+    }
+
+    #poke_info .info {
+        width: 95%;
+    }
 }
 
 #croix {
