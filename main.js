@@ -171,7 +171,7 @@ const recherche = document.querySelector('#rechercher').addEventListener('click'
 })
 
 const scrollListner = window.addEventListener('scroll', () => {
-    if(window.scrollY - lastYLoad >= 180 && pokemonsLoaded <= pokemons_number && !inload) {
+    if(window.scrollY - lastYLoad >= 240 && pokemonsLoaded <= pokemons_number && !inload) {
         lastYLoad = window.scrollY
         if(pokemonsToLoad + 6 >= pokemons_number) {
             for(let f = 0;f <= 6;f++) {
