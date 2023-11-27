@@ -146,6 +146,10 @@ button#rechercher {
     color: white;
 }
 
+button#rechercher:hover {
+    background-color: rgba(0, 58, 182, 0.7);
+}
+
 #loading {
     background-color: black;
     opacity: 0.5;
